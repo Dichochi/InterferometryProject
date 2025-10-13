@@ -51,10 +51,12 @@ class SDRSystem:
             return False
 
 
-    def record_data(self, sample_rate, duration):
+    def record_data(self, sample_rate, duration,ch1_gain,ch2_gain):
             """Record IQ samples to file."""
             num_samps = int(sample_rate * duration)
             self.sdr.sample_rate= sample_rate
+            self.sdr.rx_hardwaregain_chan0=ch1_gain
+            self.sdr.rx_hardwaregain_chan0=ch2_gain
             num_samps_per_buffer= self.num_samps_per_buffer
             num_buffers = int(np.ceil(num_samps / num_samps_per_buffer))
             numbuffers_in_file=0
